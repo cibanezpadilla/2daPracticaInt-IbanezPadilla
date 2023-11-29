@@ -1,4 +1,4 @@
-# desafio7-ibanezpadilla
+# 2daPracticaInt-IbanezPadilla
 
 ### Ejecucion
 
@@ -9,4 +9,5 @@
 4. Las vistas principal se visualiza en localhost8080/home
 5. Se puede ejecutar por query el filtro category para filtrar productos por categoría
 6. Para hacer la autenticacion con Github debe estar deslogeado de su cuenta Github
-7. Arreglé lo necesario para que en la vista de productos aparezca el rol: ADMIN si el usuario se loggea con el email adminCoder@coder.com y la contraseña adminCod3r123# 2daPracticaInt-IbanezPadilla
+7. Arreglé lo necesario para que en la vista de productos aparezca el rol: ADMIN si el usuario se loggea con el email adminCoder@coder.com y la contraseña adminCod3r123
+8. Usé express-flash para mostrar los mensajes
