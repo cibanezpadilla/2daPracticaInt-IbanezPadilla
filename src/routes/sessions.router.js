@@ -14,26 +14,28 @@ router.post('/signup', passport.authenticate('signup'),(req, res) => {
 })
 
 
-
+/* //con flash
 router.post('/login', (req, res, next) => {
-  passport.authenticate('login', { failureFlash: true }, (err, user, info) => {
+  passport.authenticate('login', { failureFlash: true, failureMessage: true, failureRedirect: '/error' }, (err, user, info) => {
     // Verifico si algun error durante la autenticación
     if (err) {
       return next(err);
     }
+    
     // Verifico si el usuario está autenticado, si no hay user, muestra mensajes
     //de error que armé en la estrategia en passport.js
-    if (!user) {                
-      const messages = info.message
-      return res.render("login", {messages, style: "login"}); 
-    }    
+    // if (!user) { 
+    //   console.log(req.flash('error'));               
+    //   const messages = info.message
+    //   return res.render("login", {messages, style: "login"}); 
+    // }    
     
     const { first_name, last_name, email, age, role, carts } = user;
     const token = generateToken({ first_name, last_name, email, age, role, carts });
     res.cookie('token', token, { maxAge: 60000, httpOnly: true });
     return res.redirect('/api/sessions/current');
   })(req, res, next);
-});
+}); */
 
 
 
@@ -50,22 +52,19 @@ router.get('/signout', async(req, res)=>{
 
 
 //ESTO ES LO QUE HIZO EL PROFE EN CLASE QUE AL FINAL LO REFORMULÉ
-/* router.post('/login', passport.authenticate('login'),(req, res) => {
+router.post('/login', passport.authenticate('login', {failureMessage: true, failureRedirect: "/login"}),(req, res) => {
   //  res.json({message: 'Signed up'})
     //le paso el req.user por parámetro a generateToken para guardar en el token la info del usuario
     
-    const {first_name, last_name, email, age, role, carts} = req.user
-    
-    console.log('age', req.user.age)
-    console.log('req.user', req.user)
-    console.log('req flash', req.flash('error'))
+    const {first_name, last_name, email, age, role, carts} = req.user    
+   
     const token = generateToken({ first_name, last_name, email, age, role, carts})
     //ahora guardo en cookies el token, 'token' va a ser el nombre de la cookie
     //maxAge es la duracion de la cookie y httpOnly para que  no se pueda
     //recuperar esa cookie desde el front, solo va a ser accedido desde un request http
     res.cookie('token', token, { maxAge: 60000, httpOnly: true })
     return res.redirect('/api/sessions/current')
-})  */
+}) 
 
 
 

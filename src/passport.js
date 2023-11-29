@@ -32,24 +32,29 @@ passport.use('signup', new LocalStrategy({
 }))
 
 
-//ahora creo mi estrategia de login
+
 passport.use('login', new LocalStrategy({
   usernameField: 'email',
-  failureFlash: true,
-  //para el login no necesito al objeto request    
+  /* failureFlash: true, */     
 }, async(email, password, done)=>{
   //y aca creo mi estrategia de login    
   if (!email || !password){      
-      return done(null, false, {message: 'All fields are required'})
+      return done(null, false, {message: 'All fields are required LUNA'})
   }
   try{
       const user = await uManager.findUserByEmail(email)
+      //lo que me intentamos con nico
+      // if (!user) {
+      //   console.log('user error', user);      
+      // return done(null, false, req.flash('signUpMessage', 'That email is already taken.'));
+      //}
+      //asi tenia farid
       if(!user){
-          return done(null, false, {message: 'You need to sign up first'})
+          return done(null, false, {message: 'You need to sign up first LUNA'})
       }
       const isPassValid = await compareData(password, user.password)
       if(!isPassValid){
-          return done(null, false, {message: 'Incorrect username or password'})
+          return done(null, false, {message: 'Incorrect username or password LUNA'})
       }      
       done(null, user)      
   }catch (error){

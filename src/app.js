@@ -42,9 +42,10 @@ app.use(
 
 
 //passport
+/* app.use(flash()); */
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(flash());
+
 
 
 
