@@ -39,7 +39,7 @@ passport.use('login', new LocalStrategy({
 }, async(email, password, done)=>{
   //y aca creo mi estrategia de login    
   if (!email || !password){      
-      return done(null, false, {message: 'All fields are required LUNA'})
+      return done(null, false, {message: 'All fields are required'})
   }
   try{
       const user = await uManager.findUserByEmail(email)
@@ -50,11 +50,11 @@ passport.use('login', new LocalStrategy({
       //}
       //asi tenia farid
       if(!user){
-          return done(null, false, {message: 'You need to sign up first LUNA'})
+          return done(null, false, {message: 'You need to sign up first'})
       }
       const isPassValid = await compareData(password, user.password)
       if(!isPassValid){
-          return done(null, false, {message: 'Incorrect username or password LUNA'})
+          return done(null, false, {message: 'Incorrect username or password'})
       }      
       done(null, user)      
   }catch (error){
